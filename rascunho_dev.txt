@@ -1,0 +1,31 @@
+alter table Dados add download DECIMAL (3,1);
+alter table Dados add upload DECIMAL (3,1);
+alter table Dados add ping DECIMAL (3,1);
+
+EXEC sp_rename 'dbo.Dados.Download', 'download', 'COLUMN';
+
+
+
+select 
+        download,
+        upload,
+        ping,
+            dataHora,
+                    DATE_FORMAT(dataHora,'%H:%i:%s') as horario
+                    from internet
+                    order by idDado desc limit 1`
+
+
+select
+        percentualCpu,
+        freqAtual,
+        discoUsado,
+        memoriaUsada,
+                        dataHora,
+                        DATE_FORMAT(dataHora,'%H:%i:%s') as horario
+                    from dados
+                    where fkServidor = 1
+                    order by idDados desc limit 7
+
+
+where fkServidor = ${idServidor} 
